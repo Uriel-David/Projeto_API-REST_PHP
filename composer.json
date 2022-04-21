@@ -4,9 +4,7 @@
             "App\\":"App"
         },
         "files": [
-        	"config.php"
+        	"App/Database/config.php"
         ]
-    },
-    "require": {
     }
 }
