@@ -123,6 +123,7 @@ CREATE TABLE `api_athletes`.`athletes_tenis` (
 
 INSERT INTO `athletes_tenis` (`id`, `nome`, `nif`, `morada`, `telefone`, `email`, `data_nascimento`, `altura`, `peso`, `modalidade`, `mao_preferencial`, `ranking_mundial`) VALUES
 (NULL, 'Joaquim', '123456789', 'Rua Joaquim Moreira, Nº 999', '123456789', 'joaquim@ryomaechizen.com', '99-99-9999', '175', '75', 'Tenis', 'Direita', '123');
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
