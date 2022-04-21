@@ -1,12 +1,12 @@
 <?php
-  namespace App\Scripts;
+  namespace App\Services;
 
-  class RequestsSoccerAPI
+  class RequestsTenisAPI
   {
-    public static function insertAthleteRequest($connection, $table, $data)
+    public static function insertAthleteRequest($connection, string $table, array $data)
     {
-      $sql = 'INSERT INTO '.$table.' (`id`, `nome`, `nif`, `morada`, `telefone`, `email`, `data_nascimento`, `altura`, `peso`, `modalidade`, `pe_preferencial`, `posicao_campo`) VALUES
-      (NULL, :nome, :nif, :morada, :telefone, :email, :nascimento, :altura, :peso, :modalidade, :pe_preferencial, :posicao_campo)';
+      $sql = 'INSERT INTO '.$table.' (`id`, `nome`, `nif`, `morada`, `telefone`, `email`, `data_nascimento`, `altura`, `peso`, `modalidade`, `mao_preferencial`, `ranking_mundial`) VALUES
+      (NULL, :nome, :nif, :morada, :telefone, :email, :nascimento, :altura, :peso, :modalidade, :mao_preferencial, :ranking_mundial)';
       $stmt = $connection->prepare($sql);
       $stmt->bindValue(':nome', $data['nome']);
       $stmt->bindValue(':nif', $data['nif']);
@@ -17,8 +17,8 @@
       $stmt->bindValue(':altura', $data['altura']);
       $stmt->bindValue(':peso', $data['peso']);
       $stmt->bindValue(':modalidade', $data['modalidade']);
-      $stmt->bindValue(':pe_preferencial', $data['pe_preferencial']);
-      $stmt->bindValue(':posicao_campo', $data['posicao_campo']);
+      $stmt->bindValue(':mao_preferencial', $data['mao_preferencial']);
+      $stmt->bindValue(':ranking_mundial', $data['ranking_mundial']);
       $stmt->execute();
 
       if ($stmt->rowCount() > 0) {
@@ -28,7 +28,7 @@
       }
     }
 
-    public static function updateAthleteRequest($connection, $table, int $id, $data)
+    public static function updateAthleteRequest($connection, string $table, int $id, array $data)
     {
       $sqlSupport = 'SELECT * FROM '.$table.' WHERE id = :id';
       $stmt = $connection->prepare($sqlSupport);
@@ -36,7 +36,7 @@
       $stmt->execute();
       $athleteData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-      $sql = 'UPDATE '.$table.' SET nome = :nome, nif = :nif, morada = :morada, telefone = :telefone, email = :email, data_nascimento = :nascimento, altura = :altura, peso = :peso, modalidade = :modalidade, pe_preferencial = :pe_preferencial, posicao_campo = :posicao_campo WHERE '.$table.'.id = :id';
+      $sql = 'UPDATE '.$table.' SET nome = :nome, nif = :nif, morada = :morada, telefone = :telefone, email = :email, data_nascimento = :nascimento, altura = :altura, peso = :peso, modalidade = :modalidade, mao_preferencial = :mao_preferencial, ranking_mundial = :ranking_mundial WHERE '.$table.'.id = :id';
       $stmt = $connection->prepare($sql);
       $stmt->bindValue(':id', $id);
       
@@ -94,16 +94,16 @@
           $stmt->bindValue(':modalidade', $data['modalidade']);
       }
 
-      if($data['pe_preferencial'] == null || "") {
-        $stmt->bindValue(':pe_preferencial', $athleteData[0]["pe_preferencial"]);
+      if($data['mao_preferencial'] == null || "") {
+        $stmt->bindValue(':mao_preferencial', $athleteData[0]["mao_preferencial"]);
       } else {
-          $stmt->bindValue(':pe_preferencial', $data['pe_preferencial']);
+          $stmt->bindValue(':mao_preferencial', $data['mao_preferencial']);
       }
 
-      if($data['posicao_campo'] == null || "") {
-        $stmt->bindValue(':posicao_campo', $athleteData[0]["posicao_campo"]);
+      if($data['ranking_mundial'] == null || "") {
+        $stmt->bindValue(':ranking_mundial', $athleteData[0]["ranking_mundial"]);
       } else {
-          $stmt->bindValue(':posicao_campo', $data['posicao_campo']);
+          $stmt->bindValue(':ranking_mundial', $data['ranking_mundial']);
       }
 
       $stmt->execute();

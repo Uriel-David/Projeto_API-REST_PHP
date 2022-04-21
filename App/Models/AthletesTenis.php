@@ -1,8 +1,8 @@
 <?php
   namespace App\Models;
 
-  use App\Scripts\RequestsAPI;
-  use App\Scripts\RequestsTenisAPI;
+  use App\Services\RequestsAPI;
+  use App\Services\RequestsTenisAPI;
 
   class AthletesTenis
   {
@@ -20,19 +20,19 @@
         return RequestsAPI::selectAthletesAllRequest($connectionPDO, self::$table);
     }
 
-    public static function insertAthlete($data)
+    public static function insertAthlete(array $data)
     {
         $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
         return RequestsTenisAPI::insertAthleteRequest($connectionPDO, self::$table, $data);
     }
 
-    public static function updateAthlete($id, $data)
+    public static function updateAthlete(int $id, array $data)
     {
         $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
         return RequestsTenisAPI::updateAthleteRequest($connectionPDO, self::$table, $id, $data);
     }
 
-    public static function deleteAthlete($id)
+    public static function deleteAthlete(int $id)
     {
         $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
         return RequestsAPI::deleteAthleteRequest($connectionPDO, self::$table, $id);

@@ -1,8 +1,8 @@
 <?php
   namespace App\Models;
 
-  use App\Scripts\RequestsAPI;
-  use App\Scripts\RequestsSoccerAPI;
+  use App\Services\RequestsAPI;
+  use App\Services\RequestsSoccerAPI;
 
   class AthletesSoccer
   {
@@ -20,13 +20,13 @@
         return RequestsAPI::selectAthletesAllRequest($connectionPDO, self::$table);
       }
 
-      public static function insertAthlete($data)
+      public static function insertAthlete(array $data)
       {
           $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
           return RequestsSoccerAPI::insertAthleteRequest($connectionPDO, self::$table, $data);
       }
 
-      public static function updateAthlete(int $id, $data)
+      public static function updateAthlete(int $id, array $data)
       {
         $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
         return RequestsSoccerAPI::updateAthleteRequest($connectionPDO, self::$table, $id, $data);

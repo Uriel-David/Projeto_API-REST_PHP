@@ -1,4 +1,14 @@
 {
+    "name": "uriel-david/projeto_api-rest_php",
+    "description": "API REST PHP",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Uriel David Q. A. de Azevedo",
+            "email": "uriel.dqaa@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\":"App"
@@ -6,5 +16,8 @@
         "files": [
         	"App/Database/config.php"
         ]
+    },
+    "require": {
+        "coffeecode/router": "2.0.*"
     }
 }

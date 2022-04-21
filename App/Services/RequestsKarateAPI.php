@@ -1,9 +1,9 @@
 <?php
-  namespace App\Scripts;
+  namespace App\Services;
 
   class RequestsKarateAPI
   {
-    public static function insertAthleteRequest($connection, $table, $data)
+    public static function insertAthleteRequest($connection, string $table, array $data)
     {
       $sql = 'INSERT INTO '.$table.' (`id`, `nome`, `nif`, `morada`, `telefone`, `email`, `data_nascimento`, `altura`, `peso`, `modalidade`, `cinturao`, `estilo`) VALUES
       (NULL, :nome, :nif, :morada, :telefone, :email, :nascimento, :altura, :peso, :modalidade, :cinturao, :estilo)';
@@ -28,7 +28,7 @@
       }
     }
 
-    public static function updateAthleteRequest($connection, $table, int $id, $data)
+    public static function updateAthleteRequest($connection, string $table, int $id, array $data)
     {
       $sqlSupport = 'SELECT * FROM '.$table.' WHERE id = :id';
       $stmt = $connection->prepare($sqlSupport);

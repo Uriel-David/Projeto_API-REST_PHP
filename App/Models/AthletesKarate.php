@@ -1,8 +1,8 @@
 <?php
   namespace App\Models;
 
-  use App\Scripts\RequestsAPI;
-  use App\Scripts\RequestsKarateAPI;
+  use App\Services\RequestsAPI;
+  use App\Services\RequestsKarateAPI;
 
   class AthletesKarate
   {
@@ -18,13 +18,13 @@
         return RequestsAPI::selectAthletesAllRequest($connectionPDO, self::$table);
     }
 
-    public static function insertAthlete($data)
+    public static function insertAthlete(array $data)
     {
         $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
         return RequestsKarateAPI::insertAthleteRequest($connectionPDO, self::$table, $data);
     }
 
-    public static function updateAthlete(int $id, $data)
+    public static function updateAthlete(int $id, array $data)
     {
         $connectionPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
         return RequestsKarateAPI::updateAthleteRequest($connectionPDO, self::$table, $id, $data);

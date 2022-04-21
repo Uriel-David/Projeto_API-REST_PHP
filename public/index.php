@@ -1,26 +1,54 @@
 <?php
     header('Content-Type: application/json');
-    require_once '../vendor/autoload.php';
+    require '../vendor/autoload.php';
 
-    if ($_GET['url']) {
-        $url = explode('/', $_GET['url']);
+    use CoffeeCode\Router\Router;
+    
+    /**
+     * routes
+     * The controller must be in the namespace App\Controllers
+     * this produces routes for api/v1/soccer, api/v1/soccer/{id}, etc.
+     */
+    $routerSoccer = new Router(BASE_URL);
+    $routerSoccer->namespace("App\Controllers");
+    $routerSoccer->group("api/v1/soccer");
+    $routerSoccer->get("/", "AthletesSoccerController:getAllAthletes");
+    $routerSoccer->get("/{id}", "AthletesSoccerController:getOneAthlete");
+    $routerSoccer->post("/", "AthletesSoccerController:createAthlete");
+    $routerSoccer->put("/{id}", "AthletesSoccerController:updateAthlete");
+    $routerSoccer->delete("/{id}", "AthletesSoccerController:deleteAthlete");
 
-        if ($url[0] === 'api') {
-            array_shift($url);
-            $service = 'App\Services\\Athletes'.ucfirst($url[0]).'Service';
-            array_shift($url);
-            $method = strtolower($_SERVER['REQUEST_METHOD']);
+    $routerSoccer->dispatch();
 
-            try {
-                $response = call_user_func_array(array(new $service, $method), $url);
-                http_response_code(200);
-                echo json_encode(array('status' => 'sucess', 'data' => $response));
-                exit;
-            } catch (\Exception $erroResponse) {
-                http_response_code(404);
-                echo json_encode(array('status' => 'error', 'data' => $erroResponse->getMessage()), JSON_UNESCAPED_UNICODE);
-                exit;
-            }
-        }
-    }
+    /**
+     * routes
+     * The controller must be in the namespace App\Controllers
+     * this produces routes for api/v1/karate, api/v1/karate/{id}, etc.
+     */
+    $routerKarate = new Router(BASE_URL);
+    $routerKarate->namespace("App\Controllers");
+    $routerKarate->group("api/v1/karate");
+    $routerKarate->get("/", "AthletesKarateController:getAllAthletes");
+    $routerKarate->get("/{id}", "AthletesKarateController:getOneAthlete");
+    $routerKarate->post("/", "AthletesKarateController:createAthlete");
+    $routerKarate->put("/{id}", "AthletesKarateController:updateAthlete");
+    $routerKarate->delete("/{id}", "AthletesKarateController:deleteAthlete");
+
+    $routerKarate->dispatch();
+
+    /**
+     * routes
+     * The controller must be in the namespace App\Controllers
+     * this produces routes for api/v1/karate, api/v1/karate/{id}, etc.
+     */
+    $routerTenis = new Router(BASE_URL);
+    $routerTenis->namespace("App\Controllers");
+    $routerTenis->group("api/v1/tenis");
+    $routerTenis->get("/", "AthletesTenisController:getAllAthletes");
+    $routerTenis->get("/{id}", "AthletesTenisController:getOneAthlete");
+    $routerTenis->post("/", "AthletesTenisController:createAthlete");
+    $routerTenis->put("/{id}", "AthletesTenisController:updateAthlete");
+    $routerTenis->delete("/{id}", "AthletesKarateController:deleteAthlete");
+
+    $routerTenis->dispatch();
 ?>

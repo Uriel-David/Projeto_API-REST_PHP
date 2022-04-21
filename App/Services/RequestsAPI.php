@@ -1,9 +1,9 @@
 <?php
-  namespace App\Scripts;
+  namespace App\Services;
 
   class RequestsAPI
   {
-    public static function selectAthleteRequest($connection, $table, $id) {
+    public static function selectAthleteRequest($connection, string $table, string $id) {
       $sql = 'SELECT * FROM '.$table.' WHERE id = :id';
       $stmt = $connection->prepare($sql);
       $stmt->bindValue(':id', $id);
@@ -16,7 +16,7 @@
       }
     }
 
-    public static function selectAthletesAllRequest($connection, $table) {
+    public static function selectAthletesAllRequest($connection, string $table) {
       $sql = 'SELECT * FROM '.$table;
       $stmt = $connection->prepare($sql);
       $stmt->execute();
@@ -28,7 +28,7 @@
       }
     }
 
-    public static function deleteAthleteRequest($connection, $table, $id)
+    public static function deleteAthleteRequest($connection, string $table, int $id)
     {
       $sql = 'DELETE FROM '.$table.' WHERE '.$table.'.id = :id';
       $stmt = $connection->prepare($sql);
